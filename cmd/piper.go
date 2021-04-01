@@ -140,6 +140,8 @@ func Execute() {
 	rootCmd.AddCommand(ContainerExecuteStructureTestsCommand())
 	rootCmd.AddCommand(BatsExecuteTestsCommand())
 	rootCmd.AddCommand(PipelineCreateScanSummaryCommand())
+	rootCmd.AddCommand(WriteCPECommand())
+	rootCmd.AddCommand(ReadCPECommand())
 
 	addRootFlags(rootCmd)
 	if err := rootCmd.Execute(); err != nil {

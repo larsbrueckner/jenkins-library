@@ -29,7 +29,6 @@ func customDefaultsOpenFileMock(name string) (io.ReadCloser, error) {
 }
 
 func TestReadConfig(t *testing.T) {
-
 	var c Config
 
 	t.Run("Success case", func(t *testing.T) {
