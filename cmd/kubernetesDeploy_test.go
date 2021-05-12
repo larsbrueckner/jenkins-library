@@ -75,19 +75,19 @@ func TestRunKubernetesDeploy(t *testing.T) {
 
 	t.Run("test helm - docker config.json path passed as parameter", func(t *testing.T) {
 		opts := kubernetesDeployOptions{
-			ContainerRegistryURL:      "https://my.registry:55555",
-			DockerConfigJSON:          "/path/to/.docker/config.json",
-			ContainerRegistrySecret:   "testSecret",
-			ChartPath:                 "path/to/chart",
-			DeploymentName:            "deploymentName",
-			DeployTool:                "helm",
-			ForceUpdates:              true,
-			HelmDeployWaitSeconds:     400,
-			IngressHosts:              []string{"ingress.host1", "ingress.host2"},
-			Image:                     "path/to/Image:latest",
-			AdditionalParameters:      []string{"--testParam", "testValue"},
-			KubeContext:               "testCluster",
-			Namespace:                 "deploymentNamespace",
+			ContainerRegistryURL:    "https://my.registry:55555",
+			DockerConfigJSON:        "/path/to/.docker/config.json",
+			ContainerRegistrySecret: "testSecret",
+			ChartPath:               "path/to/chart",
+			DeploymentName:          "deploymentName",
+			DeployTool:              "helm",
+			ForceUpdates:            true,
+			HelmDeployWaitSeconds:   400,
+			IngressHosts:            []string{"ingress.host1", "ingress.host2"},
+			Image:                   "path/to/Image:latest",
+			AdditionalParameters:    []string{"--testParam", "testValue"},
+			KubeContext:             "testCluster",
+			Namespace:               "deploymentNamespace",
 		}
 
 		dockerConfigJSON := `{"kind": "Secret","data":{".dockerconfigjson": "ThisIsOurBase64EncodedSecret=="}}`
@@ -117,7 +117,6 @@ func TestRunKubernetesDeploy(t *testing.T) {
 			"--from-file=.dockerconfigjson=/path/to/.docker/config.json",
 			`--type="kubernetes.io/dockerconfigjson"`,
 		}, e.Calls[1].Params, "Wrong secret creation parameters")
-
 
 		assert.Equal(t, "helm", e.Calls[2].Exec, "Wrong upgrade command")
 		assert.Equal(t, []string{
